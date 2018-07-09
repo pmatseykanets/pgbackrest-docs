@@ -16,8 +16,8 @@ jobs:
           paths:
             - ./node_modules
       - run: npm run docs:build
-      - deploy:
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              bash deploy.sh
-            fi
+      # - deploy:
+      #     command: |
+      #       if [ "${CIRCLE_BRANCH}" == "master" ]; then
+      #         bash deploy.sh
+      #       fi
