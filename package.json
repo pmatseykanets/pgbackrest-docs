@@ -1,0 +1,11 @@
+{
+    "name": "pgbackrest-docs",
+    "version": "0.1.0",
+    "scripts": {
+        "dev": "vuepress dev docs",
+        "build": "vuepress build docs"
+    },
+    "devDependencies": {
+        "vuepress": "^0.8.4"
+    }
+}
