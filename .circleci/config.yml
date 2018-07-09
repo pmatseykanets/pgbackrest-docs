@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/src
+
+    docker:
+      - image: circleci/node:8.11.3-stretch-browsers
+
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run: npm run docs:build
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              bash deploy.sh
+            fi
