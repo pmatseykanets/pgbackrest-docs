@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Point In Time Recovery | pgBackRest</title>
+    <meta name="description" content="Reliable PostgreSQL Backup &amp; Restore">
+    <link rel="icon" href="/pgbackrest-docs/logo.png">
+    
+    <link rel="preload" href="/pgbackrest-docs/assets/css/0.styles.18edf712.css" as="style"><link rel="preload" href="/pgbackrest-docs/assets/js/app.01ebea85.js" as="script"><link rel="preload" href="/pgbackrest-docs/assets/js/42.663bd5fd.js" as="script"><link rel="prefetch" href="/pgbackrest-docs/assets/js/26.e11cc072.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/2.ea010887.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/3.b7507089.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/4.cfc39c6d.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/5.6b11616c.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/6.df92328a.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/7.58324044.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/8.c87957ea.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/9.0fb232f6.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/10.972bbafb.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/11.e78eb127.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/12.5928bd53.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/13.1c12197c.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/14.d84f628c.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/15.4adcb884.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/16.ef3b7049.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/17.9d3117d9.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/18.0bcae378.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/19.295fa193.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/20.94847527.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/21.b5e7b8b5.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/22.d07ad4dd.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/23.77d36072.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/24.6b6691b4.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/25.f9425e67.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/27.78d9feea.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/28.1f99e16d.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/29.28bb7045.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/30.cff46cbe.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/31.47660e90.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/32.9df22cac.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/33.37935b34.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/34.9706bcdc.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/35.5ec6e936.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/36.996e8c9b.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/37.4718e56d.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/38.b3445822.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/39.c3ad3059.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/40.567d1aff.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/41.d0b20dd8.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/43.d28dcd20.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/44.2dd273bd.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/45.bf622f74.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/46.0d093936.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/47.4a1a0f05.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/48.808678bd.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/49.18e9d1eb.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/50.fa7ae22a.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/51.63339b12.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/52.8b737e70.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/53.974f5c76.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/54.9d3ce5c2.js">
+    <link rel="stylesheet" href="/pgbackrest-docs/assets/css/0.styles.18edf712.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/pgbackrest-docs/" class="home-link router-link-active"><!----><span class="site-name">
+      pgBackRest
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><nav class="nav-links can-hide"><div class="nav-item"><a href="/pgbackrest-docs/guide/" class="nav-link router-link-active">Guide</a></div><div class="nav-item"><a href="/pgbackrest-docs/releases/" class="nav-link">Releases</a></div><div class="nav-item"><a href="/pgbackrest-docs/config/" class="nav-link">Configuration</a></div><div class="nav-item"><a href="/pgbackrest-docs/commands/" class="nav-link">Commands</a></div><a href="https://github.com/pgbackrest/pgbackrest" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header><div class="sidebar-mask"></div><div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/pgbackrest-docs/guide/" class="nav-link router-link-active">Guide</a></div><div class="nav-item"><a href="/pgbackrest-docs/releases/" class="nav-link">Releases</a></div><div class="nav-item"><a href="/pgbackrest-docs/config/" class="nav-link">Configuration</a></div><div class="nav-item"><a href="/pgbackrest-docs/commands/" class="nav-link">Commands</a></div><a href="https://github.com/pgbackrest/pgbackrest" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav><ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>Guide</span><!----></p><ul class="sidebar-group-items"><li><a href="/pgbackrest-docs/guide/" class="sidebar-link">Introduction</a></li><li><a href="/pgbackrest-docs/guide/features.html" class="sidebar-link">Features</a></li><li><a href="/pgbackrest-docs/guide/concepts.html" class="sidebar-link">Concepts</a></li><li><a href="/pgbackrest-docs/guide/installation.html" class="sidebar-link">Installation</a></li><li><a href="/pgbackrest-docs/guide/quick_start.html" class="sidebar-link">Quick Start</a></li><li><a href="/pgbackrest-docs/guide/backup.html" class="sidebar-link">Backup</a></li><li><a href="/pgbackrest-docs/guide/monitoring.html" class="sidebar-link">Monitoring</a></li><li><a href="/pgbackrest-docs/guide/retention.html" class="sidebar-link">Retention</a></li><li><a href="/pgbackrest-docs/guide/restore.html" class="sidebar-link">Restore</a></li><li><a href="/pgbackrest-docs/guide/point_in_time_recovery.html" class="active sidebar-link">Point In Time Recovery</a></li><li><a href="/pgbackrest-docs/guide/s3_support.html" class="sidebar-link">AWS S3 Support</a></li><li><a href="/pgbackrest-docs/guide/deleting_stanza.html" class="sidebar-link">Deleting a Stanza</a></li><li><a href="/pgbackrest-docs/guide/dedicated_repository_host.html" class="sidebar-link">Dedicated Repository Host</a></li><li><a href="/pgbackrest-docs/guide/parallel_backup_restore.html" class="sidebar-link">Parallel Backup / Restore</a></li><li><a href="/pgbackrest-docs/guide/starting_and_stopping.html" class="sidebar-link">Starting And Stopping</a></li><li><a href="/pgbackrest-docs/guide/replication.html" class="sidebar-link">Replication</a></li><li><a href="/pgbackrest-docs/guide/asynchronous_archiving.html" class="sidebar-link">Asynchronous Archiving</a></li><li><a href="/pgbackrest-docs/guide/backup_from_standby.html" class="sidebar-link">Backup From a Standby</a></li><li><a href="/pgbackrest-docs/guide/upgrading_postgresql.html" class="sidebar-link">Upgrading PostgreSQL</a></li></ul></div></li></ul></div><div class="page"><div class="content"><h1 id="point-in-time-recovery"><a href="#point-in-time-recovery" aria-hidden="true" class="header-anchor">#</a> Point In Time Recovery</h1><p>Restore a Backup in <a href="/pgbackrest-docs/guide/quick_start.html">Quick Start</a> performed default recovery, which is to play all the way to the end of the WAL stream. In the case of a hardware failure this is usually the best choice but for data corruption scenarios (whether machine or human in origin) Point-in-Time Recovery (PITR) is often more appropriate.</p><p>Point-in-Time Recovery (PITR) allows the WAL to be played from the last backup to a specified time, transaction id, or recovery point. For common recovery scenarios time-based recovery is arguably the most useful. A typical recovery scenario is to restore a table that was accidentally dropped or data that was accidentally deleted. Recovering a dropped table is more dramatic so that's the example given here but deleted data would be recovered in exactly the same way.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-primary ⇒ Backup the demo cluster and create a table with very important data</span>
+<span class="token function">sudo</span> -u postgres pgbackrest --stanza<span class="token operator">=</span>demo --type<span class="token operator">=</span>diff backup
+<span class="token function">sudo</span> -u postgres psql -c <span class="token string">&quot;begin; \
+       create table important_table (message text); \
+       insert into important_table values ('Important Data'); \
+       commit; \
+       select * from important_table;&quot;</span>
+    message
+----------------
+ Important Data
+<span class="token punctuation">(</span>1 row<span class="token punctuation">)</span>
+</code></pre></div><p>It is important to represent the time as reckoned by PostgreSQL and to include timezone offsets. This reduces the possibility of unintended timezone conversions and an unexpected recovery result.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-primary ⇒ Get the time from PostgreSQL</span>
+<span class="token function">sudo</span> -u postgres psql -Atc <span class="token string">&quot;select current_timestamp&quot;</span>
+2018-05-06 15:17:58.783787+00
+</code></pre></div><p>Now that the time has been recorded the table is dropped. In practice finding the exact time that the table was dropped is a lot harder than in this example. It may not be possible to find the exact time, but some forensic work should be able to get you close.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-primary ⇒ Drop the important table</span>
+<span class="token function">sudo</span> -u postgres psql -c <span class="token string">&quot;begin; \
+       drop table important_table; \
+       commit; \
+       select * from important_table;&quot;</span>
+ERROR:  relation <span class="token string">&quot;important_table&quot;</span> does not exist
+LINE 1: <span class="token punctuation">..</span>.le important_table<span class="token punctuation">;</span>     commit<span class="token punctuation">;</span>     <span class="token keyword">select</span> * from important_<span class="token punctuation">..</span>.
+                                                             ^
+</code></pre></div><p>Now the restore can be performed with time-based recovery to bring back the missing table.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-primary ⇒ Stop PostgreSQL, restore the demo cluster to 2018-05-06 15:17:58.783787+00, and display recovery.conf</span>
+<span class="token function">sudo</span> pg_ctlcluster 9.4 demo stop
+<span class="token function">sudo</span> -u postgres pgbackrest --stanza<span class="token operator">=</span>demo --delta \
+       --type<span class="token operator">=</span>time <span class="token string">&quot;--target=2018-05-06 15:17:58.783787+00&quot;</span> restore
+<span class="token function">sudo</span> -u postgres <span class="token function">cat</span> /var/lib/postgresql/9.4/demo/recovery.conf
+restore_command <span class="token operator">=</span> <span class="token string">'pgbackrest --stanza=demo archive-get %f &quot;%p&quot;'</span>
+recovery_target_time <span class="token operator">=</span> <span class="token string">'2018-05-06 15:17:58.783787+00'</span>
+</code></pre></div><p>The <code>recovery.conf</code> file has been automatically generated by pgBackRest so PostgreSQL can be started immediately. Once PostgreSQL has finished recovery the table will exist again and can be queried.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-primary ⇒ Start PostgreSQL and check that the important table exists</span>
+<span class="token function">sudo</span> pg_ctlcluster 9.4 demo start
+<span class="token function">sudo</span> -u postgres psql -c <span class="token string">&quot;select * from important_table&quot;</span>
+    message
+----------------
+ Important Data
+<span class="token punctuation">(</span>1 row<span class="token punctuation">)</span>
+</code></pre></div><p>The PostgreSQL log also contains valuable information. It will indicate the time and transaction where the recovery stopped and also give the time of the last transaction to be applied.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-primary ⇒ Examine the PostgreSQL log output</span>
+<span class="token function">sudo</span> -u postgres <span class="token function">cat</span> /var/log/postgresql/postgresql-9.4-demo.log
+LOG:  database system was interrupted<span class="token punctuation">;</span> last known up at 2018-05-06 15:17:54 UTC
+LOG:  starting point-in-time recovery to 2018-05-06 15:17:58.783787+00
+LOG:  restored log <span class="token function">file</span> <span class="token string">&quot;00000004.history&quot;</span> from archive
+LOG:  restored log <span class="token function">file</span> <span class="token string">&quot;000000040000000000000019&quot;</span> from archive
+LOG:  redo starts at 0/19000028
+LOG:  consistent recovery state reached at 0/190000F0
+LOG:  restored log <span class="token function">file</span> <span class="token string">&quot;00000004000000000000001A&quot;</span> from archive
+LOG:  recovery stopping before commit of transaction 689, <span class="token function">time</span> 2018-05-06 15:17:58.990914+00
+LOG:  redo <span class="token keyword">done</span> at 0/1A016E48
+LOG:  last completed transaction was at log <span class="token function">time</span> 2018-05-06 15:17:58.563866+00
+LOG:  incomplete startup packet
+LOG:  selected new timeline ID: 5
+       <span class="token punctuation">[</span>filtered 5 lines of output<span class="token punctuation">]</span>
+</code></pre></div><p>This example was rigged to give the correct result. If a backup after the required time is chosen then PostgreSQL will not be able to recover the lost table. PostgreSQL can only play forward, not backward. To demonstrate this the important table must be dropped (again).</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-primary ⇒ Drop the important table (again)</span>
+<span class="token function">sudo</span> -u postgres psql -c <span class="token string">&quot;begin; \
+       drop table important_table; \
+       commit; \
+       select * from important_table;&quot;</span>
+ERROR:  relation <span class="token string">&quot;important_table&quot;</span> does not exist
+LINE 1: <span class="token punctuation">..</span>.le important_table<span class="token punctuation">;</span>     commit<span class="token punctuation">;</span>     <span class="token keyword">select</span> * from important_<span class="token punctuation">..</span>.
+                                                             ^
+</code></pre></div><p>Now take a new backup and attempt recovery from the new backup.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-primary ⇒ Perform a backup then attempt recovery from that backup</span>
+<span class="token function">sudo</span> -u postgres pgbackrest --stanza<span class="token operator">=</span>demo --type<span class="token operator">=</span>incr backup
+<span class="token function">sudo</span> pg_ctlcluster 9.4 demo stop
+<span class="token function">sudo</span> -u postgres pgbackrest --stanza<span class="token operator">=</span>demo --delta \
+       --type<span class="token operator">=</span>time <span class="token string">&quot;--target=2018-05-06 15:17:58.783787+00&quot;</span> restore
+<span class="token function">sudo</span> pg_ctlcluster 9.4 demo start
+<span class="token function">sudo</span> -u postgres psql -c <span class="token string">&quot;select * from important_table&quot;</span>
+ERROR:  relation <span class="token string">&quot;important_table&quot;</span> does not exist
+LINE 1: <span class="token keyword">select</span> * from important_table
+                      ^
+</code></pre></div><p>Looking at the log output it's not obvious that recovery failed to restore the table. The key is to look for the presence of the &quot;recovery stopping before...&quot; and &quot;last completed transaction...&quot; log messages. If they are not present then the recovery to the specified point-in-time was not successful.</p><div class="language-bash extra-class"><pre class="language-bash"><code>pg-primary ⇒ Examine the PostgreSQL log output to discover the recovery was not successful
+<span class="token function">sudo</span> -u postgres <span class="token function">cat</span> /var/log/postgresql/postgresql-9.4-demo.log
+LOG:  database system was interrupted<span class="token punctuation">;</span> last known up at 2018-05-06 15:18:09 UTC
+LOG:  starting point-in-time recovery to 2018-05-06 15:17:58.783787+00
+LOG:  restored log <span class="token function">file</span> <span class="token string">&quot;00000005.history&quot;</span> from archive
+LOG:  restored log <span class="token function">file</span> <span class="token string">&quot;00000005000000000000001B&quot;</span> from archive
+LOG:  redo starts at 0/1B000028
+LOG:  consistent recovery state reached at 0/1B0000F0
+LOG:  redo <span class="token keyword">done</span> at 0/1B0000F0
+LOG:  incomplete startup packet
+       <span class="token punctuation">[</span>filtered 10 lines of output<span class="token punctuation">]</span>
+</code></pre></div><p>Using an earlier backup will allow PostgreSQL to play forward to the correct time. The info command can be used to find the next to last backup.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-primary ⇒ Get backup info for the demo cluster</span>
+<span class="token function">sudo</span> -u postgres pgbackrest info
+stanza: demo
+    status: ok
+
+    db <span class="token punctuation">(</span>current<span class="token punctuation">)</span>
+        wal archive min/max <span class="token punctuation">(</span>9.4-1<span class="token punctuation">)</span>: 00000002000000000000000B / 00000005000000000000001B
+
+        full backup: 20180506-151655F
+            timestamp start/stop: 2018-05-06 15:16:55 / 2018-05-06 15:17:02
+            wal start/stop: 00000002000000000000000B / 00000002000000000000000B
+            database size: 19.2MB, backup size: 19.2MB
+            repository size: 2.2MB, repository backup size: 2.2MB
+
+        full backup: 20180506-151702F
+            timestamp start/stop: 2018-05-06 15:17:02 / 2018-05-06 15:17:08
+            wal start/stop: 00000002000000000000000C / 00000002000000000000000C
+            database size: 19.2MB, backup size: 19.2MB
+            repository size: 2.2MB, repository backup size: 2.2MB
+
+        <span class="token function">diff</span> backup: 20180506-151702F_20180506-151724D
+            timestamp start/stop: 2018-05-06 15:17:24 / 2018-05-06 15:17:27
+            wal start/stop: 000000020000000000000014 / 000000020000000000000014
+            database size: 19.2MB, backup size: 8.2KB
+            repository size: 2.2MB, repository backup size: 400B
+            backup reference list: 20180506-151702F
+
+        incr backup: 20180506-151702F_20180506-151737I
+            timestamp start/stop: 2018-05-06 15:17:37 / 2018-05-06 15:17:42
+            wal start/stop: 000000030000000000000016 / 000000030000000000000016
+            database size: 31.7MB, backup size: 12.6MB
+            repository size: 3.7MB, repository backup size: 1.5MB
+            backup reference list: 20180506-151702F
+        <span class="token function">diff</span> backup: 20180506-151702F_20180506-151753D
+            timestamp start/stop: 2018-05-06 15:17:53 / 2018-05-06 15:17:58
+            wal start/stop: 000000040000000000000019 / 000000040000000000000019
+            database size: 25.5MB, backup size: 6.3MB
+            repository size: 3MB, repository backup size: 781KB
+            backup reference list: 20180506-151702F
+
+        incr backup: 20180506-151702F_20180506-151807I
+            timestamp start/stop: 2018-05-06 15:18:07 / 2018-05-06 15:18:11
+            wal start/stop: 00000005000000000000001B / 00000005000000000000001B
+            database size: 25.5MB, backup size: 1.7MB
+            repository size: 3MB, repository backup size: 201.5KB
+            backup reference list: 20180506-151702F, 20180506-151702F_20180506-151753D
+</code></pre></div><p>The default behavior for restore is to use the last backup but an earlier backup can be specified with the <code>--set</code> option.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-primary ⇒ Stop PostgreSQL, restore from the selected backup, and start PostgreSQL</span>
+<span class="token function">sudo</span> pg_ctlcluster 9.4 demo stop
+<span class="token function">sudo</span> -u postgres pgbackrest --stanza<span class="token operator">=</span>demo --delta \
+       --type<span class="token operator">=</span>time <span class="token string">&quot;--target=2018-05-06 15:17:58.783787+00&quot;</span> \
+       --set<span class="token operator">=</span>20180506-151702F_20180506-151753D restore
+<span class="token function">sudo</span> pg_ctlcluster 9.4 demo start
+<span class="token function">sudo</span> -u postgres psql -c <span class="token string">&quot;select * from important_table&quot;</span>
+    message
+----------------
+ Important Data
+<span class="token punctuation">(</span>1 row<span class="token punctuation">)</span>
+</code></pre></div><p>Now the the log output will contain the expected recovery stopping before... and last completed transaction... messages showing that the recovery was successful.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-primary ⇒ Examine the PostgreSQL log output for log messages indicating success</span>
+<span class="token function">sudo</span> -u postgres <span class="token function">cat</span> /var/log/postgresql/postgresql-9.4-demo.log
+LOG:  database system was interrupted<span class="token punctuation">;</span> last known up at 2018-05-06 15:17:54 UTC
+LOG:  starting point-in-time recovery to 2018-05-06 15:17:58.783787+00
+LOG:  restored log <span class="token function">file</span> <span class="token string">&quot;00000004.history&quot;</span> from archive
+LOG:  restored log <span class="token function">file</span> <span class="token string">&quot;000000040000000000000019&quot;</span> from archive
+LOG:  redo starts at 0/19000028
+LOG:  consistent recovery state reached at 0/190000F0
+LOG:  restored log <span class="token function">file</span> <span class="token string">&quot;00000004000000000000001A&quot;</span> from archive
+LOG:  recovery stopping before commit of transaction 689, <span class="token function">time</span> 2018-05-06 15:17:58.990914+00
+LOG:  redo <span class="token keyword">done</span> at 0/1A016E48
+LOG:  last completed transaction was at log <span class="token function">time</span> 2018-05-06 15:17:58.563866+00
+LOG:  incomplete startup packet
+LOG:  restored log <span class="token function">file</span> <span class="token string">&quot;00000005.history&quot;</span> from archive
+       <span class="token punctuation">[</span>filtered 8 lines of output<span class="token punctuation">]</span>
+</code></pre></div></div><div class="page-edit"><div class="edit-link"><a href="https://github.com/pgbackrest/pgbackrest/edit/master/guide/point_in_time_recovery.md" target="_blank" rel="noopener noreferrer">Edit this page</a><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div><!----></div><div class="page-nav"><p class="inner"><span class="prev">
+        ← <a href="/pgbackrest-docs/guide/restore.html" class="prev">
+          Restore
+        </a></span><span class="next"><a href="/pgbackrest-docs/guide/s3_support.html">
+          AWS S3 Support
+        </a> →
+      </span></p></div></div></div></div>
+    <script src="/pgbackrest-docs/assets/js/42.663bd5fd.js" defer></script><script src="/pgbackrest-docs/assets/js/app.01ebea85.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Replication | pgBackRest</title>
+    <meta name="description" content="Reliable PostgreSQL Backup &amp; Restore">
+    <link rel="icon" href="/pgbackrest-docs/logo.png">
+    
+    <link rel="preload" href="/pgbackrest-docs/assets/css/0.styles.18edf712.css" as="style"><link rel="preload" href="/pgbackrest-docs/assets/js/app.01ebea85.js" as="script"><link rel="preload" href="/pgbackrest-docs/assets/js/44.2dd273bd.js" as="script"><link rel="prefetch" href="/pgbackrest-docs/assets/js/26.e11cc072.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/2.ea010887.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/3.b7507089.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/4.cfc39c6d.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/5.6b11616c.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/6.df92328a.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/7.58324044.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/8.c87957ea.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/9.0fb232f6.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/10.972bbafb.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/11.e78eb127.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/12.5928bd53.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/13.1c12197c.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/14.d84f628c.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/15.4adcb884.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/16.ef3b7049.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/17.9d3117d9.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/18.0bcae378.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/19.295fa193.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/20.94847527.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/21.b5e7b8b5.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/22.d07ad4dd.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/23.77d36072.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/24.6b6691b4.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/25.f9425e67.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/27.78d9feea.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/28.1f99e16d.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/29.28bb7045.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/30.cff46cbe.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/31.47660e90.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/32.9df22cac.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/33.37935b34.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/34.9706bcdc.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/35.5ec6e936.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/36.996e8c9b.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/37.4718e56d.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/38.b3445822.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/39.c3ad3059.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/40.567d1aff.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/41.d0b20dd8.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/42.663bd5fd.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/43.d28dcd20.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/45.bf622f74.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/46.0d093936.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/47.4a1a0f05.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/48.808678bd.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/49.18e9d1eb.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/50.fa7ae22a.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/51.63339b12.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/52.8b737e70.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/53.974f5c76.js"><link rel="prefetch" href="/pgbackrest-docs/assets/js/54.9d3ce5c2.js">
+    <link rel="stylesheet" href="/pgbackrest-docs/assets/css/0.styles.18edf712.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/pgbackrest-docs/" class="home-link router-link-active"><!----><span class="site-name">
+      pgBackRest
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><nav class="nav-links can-hide"><div class="nav-item"><a href="/pgbackrest-docs/guide/" class="nav-link router-link-active">Guide</a></div><div class="nav-item"><a href="/pgbackrest-docs/releases/" class="nav-link">Releases</a></div><div class="nav-item"><a href="/pgbackrest-docs/config/" class="nav-link">Configuration</a></div><div class="nav-item"><a href="/pgbackrest-docs/commands/" class="nav-link">Commands</a></div><a href="https://github.com/pgbackrest/pgbackrest" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header><div class="sidebar-mask"></div><div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/pgbackrest-docs/guide/" class="nav-link router-link-active">Guide</a></div><div class="nav-item"><a href="/pgbackrest-docs/releases/" class="nav-link">Releases</a></div><div class="nav-item"><a href="/pgbackrest-docs/config/" class="nav-link">Configuration</a></div><div class="nav-item"><a href="/pgbackrest-docs/commands/" class="nav-link">Commands</a></div><a href="https://github.com/pgbackrest/pgbackrest" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav><ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>Guide</span><!----></p><ul class="sidebar-group-items"><li><a href="/pgbackrest-docs/guide/" class="sidebar-link">Introduction</a></li><li><a href="/pgbackrest-docs/guide/features.html" class="sidebar-link">Features</a></li><li><a href="/pgbackrest-docs/guide/concepts.html" class="sidebar-link">Concepts</a></li><li><a href="/pgbackrest-docs/guide/installation.html" class="sidebar-link">Installation</a></li><li><a href="/pgbackrest-docs/guide/quick_start.html" class="sidebar-link">Quick Start</a></li><li><a href="/pgbackrest-docs/guide/backup.html" class="sidebar-link">Backup</a></li><li><a href="/pgbackrest-docs/guide/monitoring.html" class="sidebar-link">Monitoring</a></li><li><a href="/pgbackrest-docs/guide/retention.html" class="sidebar-link">Retention</a></li><li><a href="/pgbackrest-docs/guide/restore.html" class="sidebar-link">Restore</a></li><li><a href="/pgbackrest-docs/guide/point_in_time_recovery.html" class="sidebar-link">Point In Time Recovery</a></li><li><a href="/pgbackrest-docs/guide/s3_support.html" class="sidebar-link">AWS S3 Support</a></li><li><a href="/pgbackrest-docs/guide/deleting_stanza.html" class="sidebar-link">Deleting a Stanza</a></li><li><a href="/pgbackrest-docs/guide/dedicated_repository_host.html" class="sidebar-link">Dedicated Repository Host</a></li><li><a href="/pgbackrest-docs/guide/parallel_backup_restore.html" class="sidebar-link">Parallel Backup / Restore</a></li><li><a href="/pgbackrest-docs/guide/starting_and_stopping.html" class="sidebar-link">Starting And Stopping</a></li><li><a href="/pgbackrest-docs/guide/replication.html" class="active sidebar-link">Replication</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/pgbackrest-docs/guide/replication.html#installation" class="sidebar-link">Installation</a></li><li class="sidebar-sub-header"><a href="/pgbackrest-docs/guide/replication.html#setup-trusted-ssh" class="sidebar-link">Setup Trusted SSH</a></li><li class="sidebar-sub-header"><a href="/pgbackrest-docs/guide/replication.html#hot-standby" class="sidebar-link">Hot Standby</a></li><li class="sidebar-sub-header"><a href="/pgbackrest-docs/guide/replication.html#streaming-replication" class="sidebar-link">Streaming Replication</a></li></ul></li><li><a href="/pgbackrest-docs/guide/asynchronous_archiving.html" class="sidebar-link">Asynchronous Archiving</a></li><li><a href="/pgbackrest-docs/guide/backup_from_standby.html" class="sidebar-link">Backup From a Standby</a></li><li><a href="/pgbackrest-docs/guide/upgrading_postgresql.html" class="sidebar-link">Upgrading PostgreSQL</a></li></ul></div></li></ul></div><div class="page"><div class="content"><h1 id="replication"><a href="#replication" aria-hidden="true" class="header-anchor">#</a> Replication</h1><p>Replication allows multiple copies of a PostgreSQL cluster (called standbys) to be created from a single primary. The standbys are useful for balancing reads and to provide redundancy in case the primary host fails.</p><h2 id="installation"><a href="#installation" aria-hidden="true" class="header-anchor">#</a> Installation</h2><p>A new host named pg-standby is created to run the standby.</p><p>pgBackRest is written in Perl which is included with Debian/Ubuntu by default. Some additional modules must also be installed but they are available as standard packages.</p><div class="language-bash extra-class"><pre class="language-bash"><code>pg-standby ⇒ Install required Perl packages
+<span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libdbd-pg-perl libio-socket-ssl-perl libxml-libxml-perl
+</code></pre></div><p>Debian/Ubuntu packages for pgBackRest are available at <a href="https://www.postgresql.org/download/linux/ubuntu/" target="_blank" rel="noopener noreferrer">apt.postgresql.org<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>. If they are not provided for your distribution/version it is easy to download the source and install manually.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Download version 2.02 of pgBackRest</span>
+<span class="token function">sudo</span> <span class="token function">wget</span> -q -O - \
+       https://github.com/pgbackrest/pgbackrest/archive/release/2.02.tar.gz <span class="token operator">|</span> \
+       <span class="token function">sudo</span> <span class="token function">tar</span> zx -C /root
+pg-standby ⇒ Install pgBackRest
+<span class="token function">sudo</span> <span class="token function">cp</span> -r /root/pgbackrest-release-2.02/lib/pgBackRest \
+       /usr/share/perl5
+<span class="token function">sudo</span> <span class="token function">find</span> /usr/share/perl5/pgBackRest -type f -exec <span class="token function">chmod</span> 644 <span class="token punctuation">{</span><span class="token punctuation">}</span> +
+<span class="token function">sudo</span> <span class="token function">find</span> /usr/share/perl5/pgBackRest -type d -exec <span class="token function">chmod</span> 755 <span class="token punctuation">{</span><span class="token punctuation">}</span> +
+<span class="token function">sudo</span> <span class="token function">mkdir</span> -m 770 /var/log/pgbackrest
+<span class="token function">sudo</span> <span class="token function">chown</span> postgres:postgres /var/log/pgbackrest
+<span class="token function">sudo</span> <span class="token function">mkdir</span> /etc/pgbackrest
+<span class="token function">sudo</span> <span class="token function">mkdir</span> /etc/pgbackrest/conf.d
+<span class="token function">sudo</span> <span class="token function">touch</span> /etc/pgbackrest/pgbackrest.conf
+<span class="token function">sudo</span> <span class="token function">chmod</span> 640 /etc/pgbackrest/pgbackrest.conf
+<span class="token function">sudo</span> <span class="token function">chown</span> postgres:postgres /etc/pgbackrest/pgbackrest.conf
+</code></pre></div><p>pgBackRest requires a companion C library that enhances performance and enables the <code>checksum-page</code> option and encryption. Pre-built packages are generally a better option than building the C library manually but the steps required are given below for completeness. Depending on the distribution a number of packages may be required which will not be enumerated here.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Build and Install C Library</span>
+<span class="token function">sudo</span> sh -c <span class="token string">'cd /root/pgbackrest-release-2.02/libc &amp;&amp; \
+       perl Makefile.PL INSTALLMAN1DIR=none INSTALLMAN3DIR=none'</span>
+<span class="token function">sudo</span> <span class="token function">make</span> -C /root/pgbackrest-release-2.02/libc <span class="token function">test</span>
+<span class="token function">sudo</span> <span class="token function">make</span> -C /root/pgbackrest-release-2.02/libc <span class="token function">install</span>
+</code></pre></div><p>Although most of pgBackRest is written in Perl, the main executable is written in C. This allows certain time-critical commands (like async archive-push) to run more quickly.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Build and Install Binary</span>
+<span class="token function">sudo</span> <span class="token function">make</span> -C /root/pgbackrest-release-2.02/src
+<span class="token function">sudo</span> <span class="token function">make</span> -C /root/pgbackrest-release-2.02/src <span class="token function">install</span>
+</code></pre></div><h2 id="setup-trusted-ssh"><a href="#setup-trusted-ssh" aria-hidden="true" class="header-anchor">#</a> Setup Trusted SSH</h2><p>pgBackRest requires trusted (no password) SSH to enable communication between the hosts.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Create pg-standby host key pair</span>
+<span class="token function">sudo</span> -u postgres <span class="token function">mkdir</span> -m 750 -p /home/postgres/.ssh
+<span class="token function">sudo</span> -u postgres ssh-keygen -f /home/postgres/.ssh/id_rsa \
+       -t rsa -b 4096 -N <span class="token string">&quot;&quot;</span>
+</code></pre></div><p>Exchange keys between repository and pg-standby.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># repository ⇒ Copy pg-standby public key to repository</span>
+<span class="token function">sudo</span> <span class="token function">ssh</span> root@pg-standby <span class="token function">cat</span> /home/postgres/.ssh/id_rsa.pub <span class="token operator">|</span> \
+       <span class="token function">sudo</span> -u pgbackrest <span class="token function">tee</span> -a /home/pgbackrest/.ssh/authorized_keys
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Copy repository public key to pg-standby</span>
+<span class="token function">sudo</span> <span class="token function">ssh</span> root@repository <span class="token function">cat</span> /home/pgbackrest/.ssh/id_rsa.pub <span class="token operator">|</span> \
+       <span class="token function">sudo</span> -u postgres <span class="token function">tee</span> -a /home/postgres/.ssh/authorized_keys
+</code></pre></div><p>Test that connections can be made from repository to pg-standby and vice versa.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># repository ⇒ Test connection from repository to pg-standby</span>
+<span class="token function">sudo</span> -u pgbackrest <span class="token function">ssh</span> postgres@pg-standby
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Test connection from pg-standby to repository</span>
+<span class="token function">sudo</span> -u postgres <span class="token function">ssh</span> pgbackrest@repository
+</code></pre></div><h2 id="hot-standby"><a href="#hot-standby" aria-hidden="true" class="header-anchor">#</a> Hot Standby</h2><p>A hot standby performs replication using the WAL archive and allows read-only queries.
+pgBackRest configuration is very similar to pg-primary except that the standby_mode setting will be enabled to keep the cluster in recovery mode when the end of the WAL stream has been reached.</p><div class="language-ini extra-class"><pre class="language-ini"><code># pg-standby:/etc/pgbackrest/pgbackrest.conf ⇒ Configure pgBackRest on the standby
+<span class="token selector">[demo]</span>
+<span class="token constant">pg1-path</span><span class="token attr-value"><span class="token punctuation">=</span>/var/lib/postgresql/9.4/demo</span>
+<span class="token constant">recovery-option</span><span class="token attr-value"><span class="token punctuation">=</span>standby_mode=on</span>
+
+<span class="token selector">[global]</span>
+<span class="token constant">log-level-file</span><span class="token attr-value"><span class="token punctuation">=</span>detail</span>
+<span class="token constant">repo1-host</span><span class="token attr-value"><span class="token punctuation">=</span>repository</span>
+</code></pre></div><p>The demo cluster must be created (even though it will be overwritten restore) in order to create the PostgreSQL configuration files.</p><div class="language-bash extra-class"><pre class="language-bash"><code>pg-standby ⇒ Create demo cluster
+<span class="token function">sudo</span> pg_createcluster 9.4 demo
+</code></pre></div><p>Now the standby can be created with the restore command.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Restore the demo standby cluster</span>
+<span class="token function">sudo</span> -u postgres pgbackrest --stanza<span class="token operator">=</span>demo --delta restore
+<span class="token function">sudo</span> -u postgres <span class="token function">cat</span> /var/lib/postgresql/9.4/demo/recovery.conf
+standby_mode <span class="token operator">=</span> <span class="token string">'on'</span>
+restore_command <span class="token operator">=</span> <span class="token string">'pgbackrest --stanza=demo archive-get %f &quot;%p&quot;'</span>
+</code></pre></div><p>Note that the standby_mode setting has been written into the <code>recovery.conf</code> file. Configuring recovery settings in pgBackRest means that the <code>recovery.conf</code> file does not need to be stored elsewhere since it will be properly recreated with each restore. The <code>--type=preserve</code> option can be used with the restore to leave the existing <code>recovery.conf</code> file in place if that behavior is preferred.</p><p>The <code>hot_standby</code> setting must be enabled before starting PostgreSQL to allow read-only connections on pg-standby. Otherwise, connection attempts will be refused.</p><div class="language-ini extra-class"><pre class="language-ini"><code># pg-standby:/etc/postgresql/9.4/demo/postgresql.conf ⇒ Enable hot_standby and configure logging
+<span class="token constant">hot_standby</span> <span class="token attr-value"><span class="token punctuation">=</span> on</span>
+<span class="token constant">log_filename</span> <span class="token attr-value"><span class="token punctuation">=</span> 'postgresql.log'</span>
+<span class="token constant">log_line_prefix</span> <span class="token attr-value"><span class="token punctuation">=</span> ''</span>
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Start PostgreSQL</span>
+<span class="token function">sudo</span> pg_ctlcluster 9.4 demo start
+</code></pre></div><p>The PostgreSQL log gives valuable information about the recovery. Note especially that the cluster has entered standby mode and is ready to accept read-only connections.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Examine the PostgreSQL log output for log messages indicating success</span>
+<span class="token function">sudo</span> -u postgres <span class="token function">cat</span> /var/log/postgresql/postgresql-9.4-demo.log
+LOG:  could not bind IPv6 socket: Cannot assign requested address
+HINT:  Is another postmaster already running on port 5432? If not, <span class="token function">wait</span> a few seconds and retry.
+LOG:  database system was interrupted<span class="token punctuation">;</span> last known up at 2018-05-06 15:20:15 UTC
+LOG:  entering standby mode
+LOG:  restored log <span class="token function">file</span> <span class="token string">&quot;00000008.history&quot;</span> from archive
+LOG:  incomplete startup packet
+LOG:  restored log <span class="token function">file</span> <span class="token string">&quot;000000080000000000000023&quot;</span> from archive
+LOG:  redo starts at 0/23000028
+LOG:  consistent recovery state reached at 0/230000F0
+LOG:  database system is ready to accept <span class="token function">read</span> only connections
+</code></pre></div><p>An easy way to test that replication is properly configured is to create a table on pg-primary.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-primary ⇒ Create a new table on the primary</span>
+<span class="token function">sudo</span> -u postgres psql -c <span class="token string">&quot; \
+       begin; \
+       create table replicated_table (message text); \
+       insert into replicated_table values ('Important Data'); \
+       commit; \
+       select * from replicated_table&quot;</span><span class="token punctuation">;</span>
+    message
+----------------
+ Important Data
+<span class="token punctuation">(</span>1 row<span class="token punctuation">)</span>
+</code></pre></div><p>And then query the same table on pg-standby.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Query new table on the standby</span>
+<span class="token function">sudo</span> -u postgres psql -c <span class="token string">&quot;select * from replicated_table;&quot;</span>
+ERROR:  relation <span class="token string">&quot;replicated_table&quot;</span> does not exist
+LINE 1: <span class="token keyword">select</span> * from replicated_table<span class="token punctuation">;</span>
+                      ^
+</code></pre></div><p>So, what went wrong? Since PostgreSQL is pulling WAL segments from the archive to perform replication, changes won't be seen on the standby until the WAL segment that contains those changes is pushed from pg-primary.</p><p>This can be done manually by calling <code>pg_switch_xlog()</code> which pushes the current WAL segment to the archive (a new WAL segment is created to contain further changes).</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-primary ⇒ Call pg_switch_xlog()</span>
+<span class="token function">sudo</span> -u postgres psql -c <span class="token string">&quot;select *, current_timestamp from pg_switch_xlog()&quot;</span><span class="token punctuation">;</span>
+ pg_switch_xlog <span class="token operator">|</span>              now              
+----------------+-------------------------------
+ 0/24019A60     <span class="token operator">|</span> 2018-05-06 15:20:56.974643+00
+<span class="token punctuation">(</span>1 row<span class="token punctuation">)</span>
+</code></pre></div><p>Now after a short delay the table will appear on pg-standby.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Now the new table exists on the standby (may require a few retries)</span>
+<span class="token function">sudo</span> -u postgres psql -c <span class="token string">&quot; \
+       select *, current_timestamp from replicated_table&quot;</span>
+    message     <span class="token operator">|</span>              now              
+----------------+-------------------------------
+ Important Data <span class="token operator">|</span> 2018-05-06 15:20:59.232628+00
+<span class="token punctuation">(</span>1 row<span class="token punctuation">)</span>
+</code></pre></div><p>Check the standby configuration for access to the repository.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Check the configuration</span>
+<span class="token function">sudo</span> -u postgres pgbackrest --stanza<span class="token operator">=</span>demo --log-level-console<span class="token operator">=</span>info check
+P00   INFO: check <span class="token function">command</span> begin 2.02: --log-level-console<span class="token operator">=</span>info --log-level-file<span class="token operator">=</span>detail --log-level-stderr<span class="token operator">=</span>off --no-log-timestamp --pg1-path<span class="token operator">=</span>/var/lib/postgresql/9.4/demo --repo1-host<span class="token operator">=</span>repository --stanza<span class="token operator">=</span>demo
+P00   INFO: switch xlog cannot be performed on the standby, all other checks passed successfully
+P00   INFO: check <span class="token function">command</span> end: completed successfully
+</code></pre></div><h2 id="streaming-replication"><a href="#streaming-replication" aria-hidden="true" class="header-anchor">#</a> Streaming Replication</h2><p>Instead of relying solely on the WAL archive, streaming replication makes a direct connection to the primary and applies changes as soon as they are made on the primary. This results in much less lag between the primary and standby.</p><p>Streaming replication requires a user with the replication privilege.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-primary ⇒ Create replication user</span>
+<span class="token function">sudo</span> -u postgres psql -c <span class="token string">&quot; \
+       create user replicator password 'jw8s0F4' replication&quot;</span><span class="token punctuation">;</span>
+CREATE ROLE
+</code></pre></div><p>The <code>pg_hba.conf</code> file must be updated to allow the standby to connect as the replication user. Be sure to replace the IP address below with the actual IP address of your pg-primary. A reload will be required after modifying the <code>pg_hba.conf</code> file.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-primary ⇒ Create pg_hba.conf entry for replication user</span>
+<span class="token function">sudo</span> -u postgres sh -c <span class="token string">'echo \
+       &quot;host    replication     replicator      172.17.0.5/32           md5&quot; \
+       &gt;&gt; /etc/postgresql/9.4/demo/pg_hba.conf'</span>
+<span class="token function">sudo</span> pg_ctlcluster 9.4 demo reload
+</code></pre></div><p>The standby needs to know how to contact the primary so the <code>primary_conninfo</code> setting will be configured in pgBackRest.</p><div class="language-ini extra-class"><pre class="language-ini"><code># pg-standby:/etc/pgbackrest/pgbackrest.conf ⇒ Set primary_conninfo
+<span class="token selector">[demo]</span>
+<span class="token constant">pg1-path</span><span class="token attr-value"><span class="token punctuation">=</span>/var/lib/postgresql/9.4/demo</span>
+<span class="token constant">recovery-option</span><span class="token attr-value"><span class="token punctuation">=</span>standby_mode=on</span>
+<span class="token constant">recovery-option</span><span class="token attr-value"><span class="token punctuation">=</span>primary_conninfo=host=172.17.0.3 port=5432 user=replicator</span>
+
+<span class="token selector">[global]</span>
+<span class="token constant">log-level-file</span><span class="token attr-value"><span class="token punctuation">=</span>detail</span>
+<span class="token constant">repo1-host</span><span class="token attr-value"><span class="token punctuation">=</span>repository</span>
+</code></pre></div><p>It is possible to configure a password in the primary_conninfo setting but using a <code>.pgpass</code> file is more flexible and secure.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Configure the replication password in the .pgpass file.</span>
+<span class="token function">sudo</span> -u postgres sh -c <span class="token string">'echo \
+       &quot;172.17.0.3:*:replication:replicator:jw8s0F4&quot; \
+       &gt;&gt; /home/postgres/.pgpass'</span>
+<span class="token function">sudo</span> -u postgres <span class="token function">chmod</span> 600 /home/postgres/.pgpass
+</code></pre></div><p>Now the standby can be created with the restore command.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Stop PostgreSQL and restore the demo standby cluster</span>
+<span class="token function">sudo</span> pg_ctlcluster 9.4 demo stop
+<span class="token function">sudo</span> -u postgres pgbackrest --stanza<span class="token operator">=</span>demo --delta restore
+<span class="token function">sudo</span> -u postgres <span class="token function">cat</span> /var/lib/postgresql/9.4/demo/recovery.conf
+primary_conninfo <span class="token operator">=</span> <span class="token string">'host=172.17.0.3 port=5432 user=replicator'</span>
+standby_mode <span class="token operator">=</span> <span class="token string">'on'</span>
+restore_command <span class="token operator">=</span> <span class="token string">'pgbackrest --stanza=demo archive-get %f &quot;%p&quot;'</span>
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Start PostgreSQL</span>
+<span class="token function">sudo</span> pg_ctlcluster 9.4 demo start
+</code></pre></div><p>The PostgreSQL log will confirm that streaming replication has started.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Examine the PostgreSQL log output for log messages indicating success</span>
+<span class="token function">sudo</span> -u postgres <span class="token function">cat</span> /var/log/postgresql/postgresql-9.4-demo.log
+       <span class="token punctuation">[</span>filtered 9 lines of output<span class="token punctuation">]</span>
+LOG:  database system is ready to accept <span class="token function">read</span> only connections
+LOG:  restored log <span class="token function">file</span> <span class="token string">&quot;000000080000000000000024&quot;</span> from archive
+LOG:  started streaming WAL from primary at 0/25000000 on timeline 8
+</code></pre></div><p>Now when a table is created on pg-primary it will appear on pg-standby quickly and without the need to call <code>pg_switch_xlog()</code>.</p><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-primary ⇒ Create a new table on the primary</span>
+<span class="token function">sudo</span> -u postgres psql -c <span class="token string">&quot; \
+       begin; \
+       create table stream_table (message text); \
+       insert into stream_table values ('Important Data'); \
+       commit; \
+       select *, current_timestamp from stream_table&quot;</span><span class="token punctuation">;</span>
+    message     <span class="token operator">|</span>             now
+----------------+------------------------------
+ Important Data <span class="token operator">|</span> 2018-05-06 15:21:11.41956+00
+<span class="token punctuation">(</span>1 row<span class="token punctuation">)</span>
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># pg-standby ⇒ Query table on the standby</span>
+<span class="token function">sudo</span> -u postgres psql -c <span class="token string">&quot; \
+       select *, current_timestamp from stream_table&quot;</span>
+    message     <span class="token operator">|</span>              now
+----------------+-------------------------------
+ Important Data <span class="token operator">|</span> 2018-05-06 15:21:11.711161+00
+<span class="token punctuation">(</span>1 row<span class="token punctuation">)</span>
+</code></pre></div></div><div class="page-edit"><div class="edit-link"><a href="https://github.com/pgbackrest/pgbackrest/edit/master/guide/replication.md" target="_blank" rel="noopener noreferrer">Edit this page</a><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div><!----></div><div class="page-nav"><p class="inner"><span class="prev">
+        ← <a href="/pgbackrest-docs/guide/starting_and_stopping.html" class="prev">
+          Starting And Stopping
+        </a></span><span class="next"><a href="/pgbackrest-docs/guide/asynchronous_archiving.html">
+          Asynchronous Archiving
+        </a> →
+      </span></p></div></div></div></div>
+    <script src="/pgbackrest-docs/assets/js/44.2dd273bd.js" defer></script><script src="/pgbackrest-docs/assets/js/app.01ebea85.js" defer></script>
+  </body>
+</html>
